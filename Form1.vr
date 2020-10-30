@@ -1,0 +1,169 @@
+﻿Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Text.RegularExpressions
+Using System.Windows.Forms
+
+BegClass Form1 Extends(System.Windows.Forms.Form) Access(*Public) Partial(*Yes)
+
+	/region Default Constructor
+	
+	BegConstructor Access(*Public)
+		//
+		// Required for Windows Form Designer support
+		//
+		InitializeComponent()
+
+		//
+		// TODO: Add any constructor code after InitializeComponent call
+		//
+	EndConstructor
+
+	/endregion
+
+    DclDB pgmDB DBName("*Public/DG Net Local") 
+         
+    DclDiskFile  CustByNumber +
+          Type(*Update) + 
+          Org(*Indexed) + 
+          Prefix(Cust_) + 
+          File("Examples/CMastNewL1") +
+          DB(pgmDB) +
+          ImpOpen(*No) + 
+          AddRec(*Yes)
+
+	BegSr Form1_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+
+		// Occurs when form is first loaded.
+		// Put form "startup" code here (ie open files).
+
+        labelMessage.Text = String.Empty 
+
+        Connect pgmDB 
+        Open CustByNumber
+        
+	EndSr
+
+	BegSr Form1_FormClosing Access(*Private) Event(*this.FormClosing)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
+
+		// Occurs when form is closing.    
+		// Put form "housecleaning" code here (ie close files).
+        
+        Close *All
+        Disconnect pgmDB             
+	EndSr
+
+	BegSr btnOK_Click Access(*Private) Event(*this.btnOK.Click)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.EventArgs)
+
+        PopulateRecordFromUI()
+        Update CustByNumber
+
+        labelMessage.Text = String.Format('Customer #{0} updated', maskedTextBoxCMCustNo.Text)  
+
+        HideDataForm()
+	EndSr
+	
+	BegSr linklabelCancel_LinkClicked Access(*Private) Event(*this.linklabelCancel.LinkClicked)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.LinkLabelLinkClickedEventArgs)
+
+        HideDataForm()
+	EndSr
+
+	BegSr linklabelFindCustomer_LinkClicked Access(*Private) Event(*this.linklabelFindCustomer.LinkClicked)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.LinkLabelLinkClickedEventArgs)
+
+        Cust_CMCustNo = maskedTextBoxCMCustNo.Text 
+        FindCustomer(Cust_CMCustNo)
+	EndSr
+    
+	BegSr maskedTextBoxCMCustNo_KeyDown Access(*Private) Event(*this.maskedTextBoxCMCustNo.KeyDown)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.KeyEventArgs)
+
+        ClearErrorMessage()
+
+        Cust_CMCustNo = maskedTextBoxCMCustNo.Text 
+        
+        If e.KeyCode = Keys.Enter 
+            e.Handled = *True
+            e.SuppressKeyPress = *True 
+            FindCustomer(Cust_CMCustNo)
+        EndIf         
+	EndSr
+    
+    BegFunc FindCustomer Type(*Boolean) 
+        DclSrParm CustomerNumber Like(Cust_CMCustNo) 
+
+        DclFld Result Type(*Boolean) 
+
+        Chain CustByNumber Key(Cust_CMCustNo) 
+        If CustByNumber.IsFound
+            panelCustomerNumber.Enabled = *False
+            panelDataForm.Visible = *True 
+            PopulateUIFromRecord()
+            LeaveSr *True
+        Else            
+            labelMessage.Text = String.Format('Customer #{0} not found', maskedTextBoxCMCustNo.Text)
+            maskedTextBoxCMCustNo.Focus()
+            maskedTextBoxCMCustNo.SelectAll()
+            LeaveSr *False 
+        EndIf 
+	EndFunc
+
+    BegSr PopulateRecordFromUI
+        // Populate the record format from the user interface.
+        Cust_CMName     = txtCMName.Text.Trim()
+        Cust_CMAddr1    = txtCMAddr1.Text.Trim()
+        Cust_CMCity     = txtCMCity.Text.Trim()
+        Cust_CMState    = txtCMState.Text.Trim()
+        Cust_CMPostCode = txtCMPostCode.Text.Trim()
+        Cust_CMFax      = RemoveNonNumericCharacters(txtCMFax.Text)
+        Cust_CMPhone    = txtCMPhone.Text.Trim()
+    EndSr
+
+    BegSr PopulateUIFromRecord
+        // Populate the user interface from the record format.
+        txtCMName.Text     = Cust_CMName.Trim()
+        txtCMAddr1.Text    = Cust_CMAddr1.Trim()
+        txtCMCity.Text     = Cust_CMCity.Trim()
+        txtCMState.Text    = Cust_CMState.Trim()
+        txtCMPostCode.Text = Cust_CMPostCode.Trim()        
+        txtCMFax.Text      = Cust_CMFax.ToString("(000) 000-0000") 
+        txtCMPhone.Text    = Cust_CMPhone.Trim()
+    EndSr 
+
+    BegSr HideDataForm
+        panelDataForm.Visible = *False 
+        maskedTextBoxCMCustNo.Text = String.Empty 
+        maskedTextBoxCMCustNo.Focus()
+        panelCustomerNumber.Enabled = *True 
+    EndSr 
+
+    BegSr ClearErrorMessage
+        labelMessage.Text = String.Empty 
+    EndSr
+	
+    BegFunc RemoveNonNumericCharacters Type(*String) 
+        // Use a regular expression to remove all non-numeric characters
+        // from an input string.
+        DclSrParm Value Type(*String) 
+        
+        // [^0-9] is the regular expression that searches a string
+        // for all occurrence of non-numeric values.
+        LeaveSr Regex.Replace(Value, "[^0-9]", String.Empty)     
+    EndFunc
+    	
+	
+	
+EndClass

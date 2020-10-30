@@ -1,0 +1,309 @@
+﻿BegClass Form1 Partial(*Yes)
+
+	// Required method for Designer support - do not modify
+	// the contents of this method with the code editor.
+	BegSr InitializeComponent
+		*this.panelDataForm = *new System.Windows.Forms.Panel()
+		*this.linklabelCancel = *new System.Windows.Forms.LinkLabel()
+		*this.txtCMState = *new System.Windows.Forms.TextBox()
+		*this.btnOK = *new System.Windows.Forms.Button()
+		*this.txtCMName = *new System.Windows.Forms.TextBox()
+		*this.label55 = *new System.Windows.Forms.Label()
+		*this.txtCMFax = *new System.Windows.Forms.TextBox()
+		*this.label8 = *new System.Windows.Forms.Label()
+		*this.txtCMPhone = *new System.Windows.Forms.TextBox()
+		*this.txtCMPostCode = *new System.Windows.Forms.TextBox()
+		*this.label7 = *new System.Windows.Forms.Label()
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.txtCMAddr1 = *new System.Windows.Forms.TextBox()
+		*this.label6 = *new System.Windows.Forms.Label()
+		*this.label4 = *new System.Windows.Forms.Label()
+		*this.label5 = *new System.Windows.Forms.Label()
+		*this.txtCMCity = *new System.Windows.Forms.TextBox()
+		*this.labelMessage = *new System.Windows.Forms.Label()
+		*this.maskedTextBoxCMCustNo = *new System.Windows.Forms.MaskedTextBox()
+		*this.linklabelFindCustomer = *new System.Windows.Forms.LinkLabel()
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.panelCustomerNumber = *new System.Windows.Forms.Panel()
+		*this.panelDataForm.SuspendLayout()
+		*this.panelCustomerNumber.SuspendLayout()
+		*this.SuspendLayout()
+		//
+		//panelDataForm
+		//
+		*this.panelDataForm.Controls.Add(*this.linklabelCancel)
+		*this.panelDataForm.Controls.Add(*this.txtCMState)
+		*this.panelDataForm.Controls.Add(*this.btnOK)
+		*this.panelDataForm.Controls.Add(*this.txtCMName)
+		*this.panelDataForm.Controls.Add(*this.label55)
+		*this.panelDataForm.Controls.Add(*this.txtCMFax)
+		*this.panelDataForm.Controls.Add(*this.label8)
+		*this.panelDataForm.Controls.Add(*this.txtCMPhone)
+		*this.panelDataForm.Controls.Add(*this.txtCMPostCode)
+		*this.panelDataForm.Controls.Add(*this.label7)
+		*this.panelDataForm.Controls.Add(*this.label3)
+		*this.panelDataForm.Controls.Add(*this.txtCMAddr1)
+		*this.panelDataForm.Controls.Add(*this.label6)
+		*this.panelDataForm.Controls.Add(*this.label4)
+		*this.panelDataForm.Controls.Add(*this.label5)
+		*this.panelDataForm.Controls.Add(*this.txtCMCity)
+		*this.panelDataForm.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.panelDataForm.Location = *new System.Drawing.Point(73I, 191I)
+		*this.panelDataForm.Name = "panelDataForm"
+		*this.panelDataForm.Size = *new System.Drawing.Size(929I, 640I)
+		*this.panelDataForm.TabIndex = 0I
+		*this.panelDataForm.Visible = *False
+		//
+		//linklabelCancel
+		//
+		*this.linklabelCancel.AutoSize = *True
+		*this.linklabelCancel.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.857143, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.linklabelCancel.Location = *new System.Drawing.Point(603I, 572I)
+		*this.linklabelCancel.Name = "linklabelCancel"
+		*this.linklabelCancel.Size = *new System.Drawing.Size(88I, 29I)
+		*this.linklabelCancel.TabIndex = 32I
+		*this.linklabelCancel.TabStop = *True
+		*this.linklabelCancel.Text = "Cancel"
+		//
+		//txtCMState
+		//
+		*this.txtCMState.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.txtCMState.Location = *new System.Drawing.Point(251I, 199I)
+		*this.txtCMState.Name = "txtCMState"
+		*this.txtCMState.Size = *new System.Drawing.Size(57I, 39I)
+		*this.txtCMState.TabIndex = 21I
+		//
+		//btnOK
+		//
+		*this.btnOK.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.btnOK.Location = *new System.Drawing.Point(735I, 554I)
+		*this.btnOK.Name = "btnOK"
+		*this.btnOK.Size = *new System.Drawing.Size(157I, 63I)
+		*this.btnOK.TabIndex = 27I
+		*this.btnOK.Text = "&OK"
+		*this.btnOK.UseVisualStyleBackColor = *True
+		//
+		//txtCMName
+		//
+		*this.txtCMName.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.txtCMName.Location = *new System.Drawing.Point(251I, 27I)
+		*this.txtCMName.Name = "txtCMName"
+		*this.txtCMName.Size = *new System.Drawing.Size(620I, 39I)
+		*this.txtCMName.TabIndex = 16I
+		//
+		//label55
+		//
+		*this.label55.AutoSize = *True
+		*this.label55.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label55.Location = *new System.Drawing.Point(120I, 30I)
+		*this.label55.Name = "label55"
+		*this.label55.Size = *new System.Drawing.Size(90I, 32I)
+		*this.label55.TabIndex = 17I
+		*this.label55.Text = "Name"
+		//
+		//txtCMFax
+		//
+		*this.txtCMFax.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.txtCMFax.Location = *new System.Drawing.Point(251I, 377I)
+		*this.txtCMFax.Name = "txtCMFax"
+		*this.txtCMFax.Size = *new System.Drawing.Size(380I, 39I)
+		*this.txtCMFax.TabIndex = 26I
+		//
+		//label8
+		//
+		*this.label8.AutoSize = *True
+		*this.label8.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label8.Location = *new System.Drawing.Point(146I, 380I)
+		*this.label8.Name = "label8"
+		*this.label8.Size = *new System.Drawing.Size(62I, 32I)
+		*this.label8.TabIndex = 31I
+		*this.label8.Text = "Fax"
+		//
+		//txtCMPhone
+		//
+		*this.txtCMPhone.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.txtCMPhone.Location = *new System.Drawing.Point(251I, 318I)
+		*this.txtCMPhone.Name = "txtCMPhone"
+		*this.txtCMPhone.Size = *new System.Drawing.Size(380I, 39I)
+		*this.txtCMPhone.TabIndex = 24I
+		//
+		//txtCMPostCode
+		//
+		*this.txtCMPostCode.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.txtCMPostCode.Location = *new System.Drawing.Point(251I, 258I)
+		*this.txtCMPostCode.Name = "txtCMPostCode"
+		*this.txtCMPostCode.Size = *new System.Drawing.Size(141I, 39I)
+		*this.txtCMPostCode.TabIndex = 22I
+		//
+		//label7
+		//
+		*this.label7.AutoSize = *True
+		*this.label7.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label7.Location = *new System.Drawing.Point(112I, 321I)
+		*this.label7.Name = "label7"
+		*this.label7.Size = *new System.Drawing.Size(98I, 32I)
+		*this.label7.TabIndex = 30I
+		*this.label7.Text = "Phone"
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label3.Location = *new System.Drawing.Point(91I, 84I)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(119I, 32I)
+		*this.label3.TabIndex = 20I
+		*this.label3.Text = "Address"
+		//
+		//txtCMAddr1
+		//
+		*this.txtCMAddr1.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.txtCMAddr1.Location = *new System.Drawing.Point(251I, 81I)
+		*this.txtCMAddr1.Name = "txtCMAddr1"
+		*this.txtCMAddr1.Size = *new System.Drawing.Size(620I, 39I)
+		*this.txtCMAddr1.TabIndex = 18I
+		//
+		//label6
+		//
+		*this.label6.AutoSize = *True
+		*this.label6.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label6.Location = *new System.Drawing.Point(49I, 265I)
+		*this.label6.Name = "label6"
+		*this.label6.Size = *new System.Drawing.Size(164I, 32I)
+		*this.label6.TabIndex = 29I
+		*this.label6.Text = "Postal code"
+		//
+		//label4
+		//
+		*this.label4.AutoSize = *True
+		*this.label4.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label4.Location = *new System.Drawing.Point(146I, 142I)
+		*this.label4.Name = "label4"
+		*this.label4.Size = *new System.Drawing.Size(64I, 32I)
+		*this.label4.TabIndex = 23I
+		*this.label4.Text = "City"
+		//
+		//label5
+		//
+		*this.label5.AutoSize = *True
+		*this.label5.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label5.Location = *new System.Drawing.Point(128I, 202I)
+		*this.label5.Name = "label5"
+		*this.label5.Size = *new System.Drawing.Size(82I, 32I)
+		*this.label5.TabIndex = 25I
+		*this.label5.Text = "State"
+		//
+		//txtCMCity
+		//
+		*this.txtCMCity.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.txtCMCity.Location = *new System.Drawing.Point(251I, 139I)
+		*this.txtCMCity.Name = "txtCMCity"
+		*this.txtCMCity.Size = *new System.Drawing.Size(224I, 39I)
+		*this.txtCMCity.TabIndex = 19I
+		//
+		//labelMessage
+		//
+		*this.labelMessage.AutoSize = *True
+		*this.labelMessage.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.labelMessage.Location = *new System.Drawing.Point(79I, 900I)
+		*this.labelMessage.Name = "labelMessage"
+		*this.labelMessage.Size = *new System.Drawing.Size(93I, 32I)
+		*this.labelMessage.TabIndex = 34I
+		*this.labelMessage.Text = "label2"
+		//
+		//maskedTextBoxCMCustNo
+		//
+		*this.maskedTextBoxCMCustNo.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.maskedTextBoxCMCustNo.Location = *new System.Drawing.Point(149I, 16I)
+		*this.maskedTextBoxCMCustNo.Mask = "00000000"
+		*this.maskedTextBoxCMCustNo.Name = "maskedTextBoxCMCustNo"
+		*this.maskedTextBoxCMCustNo.Size = *new System.Drawing.Size(236I, 39I)
+		*this.maskedTextBoxCMCustNo.TabIndex = 37I
+		//
+		//linklabelFindCustomer
+		//
+		*this.linklabelFindCustomer.AutoSize = *True
+		*this.linklabelFindCustomer.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.857143, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.linklabelFindCustomer.Location = *new System.Drawing.Point(414I, 22I)
+		*this.linklabelFindCustomer.Name = "linklabelFindCustomer"
+		*this.linklabelFindCustomer.Size = *new System.Drawing.Size(61I, 29I)
+		*this.linklabelFindCustomer.TabIndex = 38I
+		*this.linklabelFindCustomer.TabStop = *True
+		*this.linklabelFindCustomer.Text = "Find"
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label1.Location = *new System.Drawing.Point(19I, 16I)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(115I, 32I)
+		*this.label1.TabIndex = 39I
+		*this.label1.Text = "Number"
+		//
+		//panelCustomerNumber
+		//
+		*this.panelCustomerNumber.Controls.Add(*this.maskedTextBoxCMCustNo)
+		*this.panelCustomerNumber.Controls.Add(*this.linklabelFindCustomer)
+		*this.panelCustomerNumber.Controls.Add(*this.label1)
+		*this.panelCustomerNumber.Location = *new System.Drawing.Point(73I, 59I)
+		*this.panelCustomerNumber.Name = "panelCustomerNumber"
+		*this.panelCustomerNumber.Size = *new System.Drawing.Size(805I, 88I)
+		*this.panelCustomerNumber.TabIndex = 40I
+		//
+		//Form1
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(168, 168)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+		*this.ClientSize = *new System.Drawing.Size(1052I, 957I)
+		*this.Controls.Add(*this.panelCustomerNumber)
+		*this.Controls.Add(*this.labelMessage)
+		*this.Controls.Add(*this.panelDataForm)
+		*this.Name = "Form1"
+		*this.Text = "Not Your Grandpa's DFU"
+		*this.panelDataForm.ResumeLayout(*False)
+		*this.panelDataForm.PerformLayout()
+		*this.panelCustomerNumber.ResumeLayout(*False)
+		*this.panelCustomerNumber.PerformLayout()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	
+	DclFld txtCMState Type(System.Windows.Forms.TextBox) Access(*Private) WithEvents(*Yes)
+	DclFld btnOK Type(System.Windows.Forms.Button) Access(*Private) WithEvents(*Yes)
+	DclFld txtCMName Type(System.Windows.Forms.TextBox) Access(*Private) WithEvents(*Yes)
+	DclFld label55 Type(System.Windows.Forms.Label) Access(*Private) WithEvents(*Yes)
+	DclFld txtCMFax Type(System.Windows.Forms.TextBox) Access(*Private) WithEvents(*Yes)
+	DclFld label8 Type(System.Windows.Forms.Label) Access(*Private) WithEvents(*Yes)
+	DclFld txtCMPhone Type(System.Windows.Forms.TextBox) Access(*Private) WithEvents(*Yes)
+	DclFld txtCMPostCode Type(System.Windows.Forms.TextBox) Access(*Private) WithEvents(*Yes)
+	DclFld label7 Type(System.Windows.Forms.Label) Access(*Private) WithEvents(*Yes)
+	DclFld label3 Type(System.Windows.Forms.Label) Access(*Private) WithEvents(*Yes)
+	DclFld txtCMAddr1 Type(System.Windows.Forms.TextBox) Access(*Private) WithEvents(*Yes)
+	DclFld label6 Type(System.Windows.Forms.Label) Access(*Private) WithEvents(*Yes)
+	DclFld label4 Type(System.Windows.Forms.Label) Access(*Private) WithEvents(*Yes)
+	DclFld label5 Type(System.Windows.Forms.Label) Access(*Private) WithEvents(*Yes)
+	DclFld txtCMCity Type(System.Windows.Forms.TextBox) Access(*Private) WithEvents(*Yes)
+	DclFld panelDataForm Type(System.Windows.Forms.Panel) Access(*Private) WithEvents(*Yes)
+	DclFld linklabelCancel Type(System.Windows.Forms.LinkLabel) Access(*Private) WithEvents(*Yes)
+	DclFld labelMessage Type(System.Windows.Forms.Label) Access(*Private) WithEvents(*Yes)
+	DclFld maskedTextBoxCMCustNo Type(System.Windows.Forms.MaskedTextBox) Access(*Private) WithEvents(*Yes)
+	DclFld linklabelFindCustomer Type(System.Windows.Forms.LinkLabel) Access(*Private) WithEvents(*Yes)
+	DclFld label1 Type(System.Windows.Forms.Label) Access(*Private) WithEvents(*Yes)
+	DclFld panelCustomerNumber Type(System.Windows.Forms.Panel) Access(*Private) WithEvents(*Yes)
+	//Required by the Windows Form Designer
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	
+	// Clean up any resources being used.
+	// "disposing" is true if managed resources should be disposed; otherwise, false.
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+	
+EndClass
