@@ -1,32 +1,51 @@
-﻿Using System
-Using System.Collections
-Using System.ComponentModel
-Using System.Data
-Using System.Drawing
+﻿
+// This example creates a DFU-like utility for a given file.
+
+// It first displays this screen
+
+// ![](https://asna.com/media/images/screen-1-3.png)
+
+// Then, given a valid customer number displays this update panel
+
+// ![](https://asna.com/media/images/screen-2-3.png)
+
+// Its intent to show some basic techniques for working with data
+// a fat-client Windows UI. 
+
+
+// [Download this code here](https://github.com/ASNA/avr-windows-dfu-example)
+
+
+Using System
 Using System.Text
 Using System.Text.RegularExpressions
 Using System.Windows.Forms
 
 BegClass Form1 Extends(System.Windows.Forms.Form) Access(*Public) Partial(*Yes)
 
-	/region Default Constructor
-	
-	BegConstructor Access(*Public)
-		//
-		// Required for Windows Form Designer support
-		//
-		InitializeComponent()
+    // As a general rule, `/region` and `/endregion` obfuscate your code and 
+    // should be avoided like Paul McCartney's solo music. [Read more
+    // about collapsible regions here](https://docs.asna.com/documentation/Help150/AVR/_HTML/avrCompilerDirectivesRegion.htm)
+    // and [here](https://docs.asna.com/documentation/Help150/AVR/_HTML/avrCompilerDirectivesEndRegion.htm)
+    /region Default Constructor
+    
+    // ### Form constructor
+    BegConstructor Access(*Public)
+        //
+        // Required for Windows Form Designer support
+        //
+        InitializeComponent()
 
-		//
-		// TODO: Add any constructor code after InitializeComponent call
-		//
-	EndConstructor
+    EndConstructor
 
-	/endregion
+    /endregion
 
-    DclDB pgmDB DBName("*Public/DG Net Local") 
+    // The database connection and diskfiles are declared in AVR 'mainline' code.
+
+    // #### Mainline code
+    DclDB pgmDB DBName("*Public/Cypress") 
          
-    DclDiskFile  CustByNumber +
+    DclDiskFile CustByNumber +
           Type(*Update) + 
           Org(*Indexed) + 
           Prefix(Cust_) + 
@@ -35,61 +54,79 @@ BegClass Form1 Extends(System.Windows.Forms.Form) Access(*Public) Partial(*Yes)
           ImpOpen(*No) + 
           AddRec(*Yes)
 
-	BegSr Form1_Load Access(*Private) Event(*this.Load)
-		DclSrParm sender *Object
-		DclSrParm e System.EventArgs
+    // Declare anything you want global to the rest of this class here. But do try to keep 
+    // global variables to a minimum. The road to programming hell is paved with global variables.
 
-		// Occurs when form is first loaded.
-		// Put form "startup" code here (ie open files).
+    // ### Form is loaded
+    BegSr Form1_Load Access(*Private) Event(*this.Load)
+        DclSrParm sender *Object
+        DclSrParm e System.EventArgs
+
+        //- Occurs when form is first loaded
+        //- Put form "startup" code here (ie open files)
+
+        // Override the runtime database. You might not need/want to do 
+        // this--but do understand that you can 
+        pgmDB.DBName = '*Public/Cypress' 
+
+        // Show connected DB name on form title bar
+        *This.Text = *This.Text + ' - ' + pgmDB.DBName
 
         labelMessage.Text = String.Empty 
 
         Connect pgmDB 
-        Open CustByNumber
-        
-	EndSr
+        Open CustByNumber        
+    EndSr
 
-	BegSr Form1_FormClosing Access(*Private) Event(*this.FormClosing)
-		DclSrParm sender Type(*Object)
-		DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
+    // ### Form is closing
+    BegSr Form1_FormClosing Access(*Private) Event(*this.FormClosing)
+        DclSrParm sender Type(*Object)
+        DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
 
-		// Occurs when form is closing.    
-		// Put form "housecleaning" code here (ie close files).
+        //- Occurs when form is closing    
+        //- Put form "housecleaning" code here (ie close files)
         
+        // Close all files and disconnect the DB when this form closes.
         Close *All
         Disconnect pgmDB             
-	EndSr
+    EndSr
 
-	BegSr btnOK_Click Access(*Private) Event(*this.btnOK.Click)
-		DclSrParm sender Type(*Object)
-		DclSrParm e Type(System.EventArgs)
+    // ### Update record
+    BegSr btnOK_Click Access(*Private) Event(*this.btnOK.Click)
+        DclSrParm sender Type(*Object)
+        DclSrParm e Type(System.EventArgs)
 
+        // Copy fields from inputs to record format fields
         PopulateRecordFromUI()
         Update CustByNumber
 
         labelMessage.Text = String.Format('Customer #{0} updated', maskedTextBoxCMCustNo.Text)  
 
-        HideDataForm()
-	EndSr
-	
-	BegSr linklabelCancel_LinkClicked Access(*Private) Event(*this.linklabelCancel.LinkClicked)
-		DclSrParm sender Type(*Object)
-		DclSrParm e Type(System.Windows.Forms.LinkLabelLinkClickedEventArgs)
+        // Reset UI
+        ResetUI()
+    EndSr
+    
+    // ### Cancel record update
+    BegSr linklabelCancel_LinkClicked Access(*Private) Event(*this.linklabelCancel.LinkClicked)
+        DclSrParm sender Type(*Object)
+        DclSrParm e Type(System.Windows.Forms.LinkLabelLinkClickedEventArgs)
 
-        HideDataForm()
-	EndSr
+        ResetUI()
+    EndSr
 
-	BegSr linklabelFindCustomer_LinkClicked Access(*Private) Event(*this.linklabelFindCustomer.LinkClicked)
-		DclSrParm sender Type(*Object)
-		DclSrParm e Type(System.Windows.Forms.LinkLabelLinkClickedEventArgs)
+    // Find customer by clicking "find" link
+    BegSr linklabelFindCustomer_LinkClicked Access(*Private) Event(*this.linklabelFindCustomer.LinkClicked)
+        DclSrParm sender Type(*Object)
+        DclSrParm e Type(System.Windows.Forms.LinkLabelLinkClickedEventArgs)
 
         Cust_CMCustNo = maskedTextBoxCMCustNo.Text 
         FindCustomer(Cust_CMCustNo)
-	EndSr
+    EndSr
     
-	BegSr maskedTextBoxCMCustNo_KeyDown Access(*Private) Event(*this.maskedTextBoxCMCustNo.KeyDown)
-		DclSrParm sender Type(*Object)
-		DclSrParm e Type(System.Windows.Forms.KeyEventArgs)
+    // Find customer by pressing Enter key
+    BegSr maskedTextBoxCMCustNo_KeyDown Access(*Private) Event(*this.maskedTextBoxCMCustNo.KeyDown)
+        DclSrParm sender Type(*Object)
+        DclSrParm e Type(System.Windows.Forms.KeyEventArgs)
 
         ClearErrorMessage()
 
@@ -100,70 +137,84 @@ BegClass Form1 Extends(System.Windows.Forms.Form) Access(*Public) Partial(*Yes)
             e.SuppressKeyPress = *True 
             FindCustomer(Cust_CMCustNo)
         EndIf         
-	EndSr
+    EndSr
     
+    // ### Find a customer by customer number
     BegFunc FindCustomer Type(*Boolean) 
+        // Return *True if record found
+        // Return *False if record not found
         DclSrParm CustomerNumber Like(Cust_CMCustNo) 
 
         DclFld Result Type(*Boolean) 
 
+        // Read customer record.
         Chain CustByNumber Key(Cust_CMCustNo) 
         If CustByNumber.IsFound
+            // If customer found
             panelCustomerNumber.Enabled = *False
             panelDataForm.Visible = *True 
             PopulateUIFromRecord()
             LeaveSr *True
         Else            
+            // If customer not found
             labelMessage.Text = String.Format('Customer #{0} not found', maskedTextBoxCMCustNo.Text)
             maskedTextBoxCMCustNo.Focus()
             maskedTextBoxCMCustNo.SelectAll()
             LeaveSr *False 
         EndIf 
-	EndFunc
+    EndFunc
 
+    // ### Copy fields from inputs fields to record format fields
     BegSr PopulateRecordFromUI
-        // Populate the record format from the user interface.
         Cust_CMName     = txtCMName.Text.Trim()
         Cust_CMAddr1    = txtCMAddr1.Text.Trim()
         Cust_CMCity     = txtCMCity.Text.Trim()
         Cust_CMState    = txtCMState.Text.Trim()
         Cust_CMPostCode = txtCMPostCode.Text.Trim()
+        // CMFax is numeric so RemoveNonNumericCharacters removes 
+        // any non-numeric characters before saving the value
         Cust_CMFax      = RemoveNonNumericCharacters(txtCMFax.Text)
         Cust_CMPhone    = txtCMPhone.Text.Trim()
     EndSr
 
+    // ### Copy fields record format fields to input fields.
     BegSr PopulateUIFromRecord
-        // Populate the user interface from the record format.
         txtCMName.Text     = Cust_CMName.Trim()
         txtCMAddr1.Text    = Cust_CMAddr1.Trim()
         txtCMCity.Text     = Cust_CMCity.Trim()
         txtCMState.Text    = Cust_CMState.Trim()
         txtCMPostCode.Text = Cust_CMPostCode.Trim()        
+        // Input fields in .NET Windows forms apps are always text. They need to be 
+        // converted to and from source and target values. Cust_CMFax is a numeric value.
+        // The .NET's ToString() method used to format the numeric value to a desired
+        // string format. [Read about .NET's custom numeric format strings here](https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings)
+
         txtCMFax.Text      = Cust_CMFax.ToString("(000) 000-0000") 
         txtCMPhone.Text    = Cust_CMPhone.Trim()
     EndSr 
 
-    BegSr HideDataForm
+    // ### Hide data input panel
+    BegSr ResetUI
         panelDataForm.Visible = *False 
         maskedTextBoxCMCustNo.Text = String.Empty 
         maskedTextBoxCMCustNo.Focus()
         panelCustomerNumber.Enabled = *True 
     EndSr 
 
+    // ### Clear error message
     BegSr ClearErrorMessage
         labelMessage.Text = String.Empty 
     EndSr
-	
+    
+    // ### Remove non-numeric characters from a string
     BegFunc RemoveNonNumericCharacters Type(*String) 
         // Use a regular expression to remove all non-numeric characters
-        // from an input string.
+        // from an input string. [Read more about regular expressions here](https://asna.com/us/tech/kb/series/learning-regex/regex-intro)
         DclSrParm Value Type(*String) 
         
         // [^0-9] is the regular expression that searches a string
-        // for all occurrence of non-numeric values.
+        // for all occurrences of non-numeric values
         LeaveSr Regex.Replace(Value, "[^0-9]", String.Empty)     
-    EndFunc
-    	
-	
-	
+    EndFunc        
+       
 EndClass
