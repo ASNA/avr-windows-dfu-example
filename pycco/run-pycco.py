@@ -62,7 +62,7 @@ if __name__ == '__main__':
     os.chdir('..')
     
     # places to look for source files
-    searches = ('global.asax', 'web.config', '*.aspx', '**/*.aspx', '**/*.vr', 'app_code/*.vr' )
+    searches = ('global.asax', 'web.config', '*.aspx', '**/*.aspx', '*.vr', '**/*.vr', 'app_code/*.vr' )
     # source file ending names to ignore.
     ignored_files = ('^.*designer.vr', '^.*assemblyinfo.vr')        
 
