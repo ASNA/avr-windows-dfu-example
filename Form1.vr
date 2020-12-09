@@ -177,7 +177,7 @@ BegClass Form1 Extends(System.Windows.Forms.Form) Access(*Public) Partial(*Yes)
         Cust_CMPhone    = txtCMPhone.Text.Trim()
     EndSr
 
-    // ### Copy fields record format fields to input fields.
+    // ### Copy fields record format fields to input fields
     BegSr PopulateUIFromRecord
         txtCMName.Text     = Cust_CMName.Trim()
         txtCMAddr1.Text    = Cust_CMAddr1.Trim()
